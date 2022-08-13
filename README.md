@@ -1,6 +1,6 @@
 # instaclone web client
 
-- [ ] Router
+- [x] Router
 - [ ] Authentication
 - [ ] Architecture
 - [ ] Styles
