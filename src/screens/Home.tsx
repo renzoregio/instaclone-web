@@ -1,17 +1,18 @@
-import { useState } from "react";
 import styled from "styled-components";
+import { isDarkModeThemeVar } from "../apollo";
 // import { isLoggedInVar } from "../apollo";
 
 const Home = () => {
 
-    const [isPressed, setIsPressed] = useState(false);
-
-    interface TitleStyle {
-        isPressed: boolean;
+    const switchTheme = () => {
+        if(isDarkModeThemeVar()){
+            isDarkModeThemeVar(false);
+        } else {
+            isDarkModeThemeVar(true);
+        }
     }
 
     const Container = styled.div`
-        background-color: whitesmoke;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
@@ -23,8 +24,7 @@ const Home = () => {
         right: 0;
     `
 
-    const Title = styled.h1<TitleStyle>`
-        color: ${props => props.isPressed ? "red" : "black"};
+    const Title = styled.h1`
         font-size: 40px;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     `
@@ -37,8 +37,8 @@ const Home = () => {
 
     return (
         <Container>
-            <Title isPressed={isPressed}>Home Screen</Title>
-            <Button onClick={() => setIsPressed(prevState => !prevState)}>Press here</Button>
+            <Title>Home Screen</Title>
+            <Button onClick={switchTheme}>{isDarkModeThemeVar() ? "Light" : "Dark"} Mode</Button>
         </Container>
     )
 }
