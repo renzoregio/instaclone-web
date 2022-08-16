@@ -37,7 +37,7 @@ const Home = () => {
 
     return (
         <Container>
-            <Title>Home Screen</Title>
+            <Title >Home Screen</Title>
             <Button onClick={switchTheme}>{isDarkModeThemeVar() ? "Light" : "Dark"} Mode</Button>
         </Container>
     )

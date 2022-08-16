@@ -9,8 +9,6 @@ function App() {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   const isDarkMode = useReactiveVar(isDarkModeThemeVar);
 
-  
-
   return (  
    <div>
       <ThemeProvider theme={isDarkMode ? darkModeTheme : lightModeTheme}>
