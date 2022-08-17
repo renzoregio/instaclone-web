@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook, faFacebookF, faFacebookSquare, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faFacebookSquare, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const Login = () => {
 
@@ -16,6 +16,11 @@ const Login = () => {
     `
     const LogoContainer = styled.div`
         margin: 20px;
+        display: flex;
+        align-items: center;
+        h1 {
+            margin-left: 15px;
+        }
     `
 
     const WhiteBox = styled.div`
@@ -28,7 +33,7 @@ const Login = () => {
         justify-content: space-evenly; 
         align-items: center;
         width: 90%;
-        
+        margin-top: 5px;
         div {
             background-color: #ededed;
             height: 2px;
@@ -38,8 +43,9 @@ const Login = () => {
         span {
             color: #959393d9;
             text-transform: uppercase;
-            margin: 0px 20px;
+            margin: 0px 25px;
             font-size: 15px;
+            font-weight: bold;
         }
     `
 
@@ -48,7 +54,7 @@ const Login = () => {
         flex-direction: column;
         align-items: center;
         padding: 20px;
-        height: 365px;
+        height: 385px;
         
 
         form {
@@ -85,12 +91,15 @@ const Login = () => {
         display: flex; 
         justify-content: space-evenly;
         width: 60%;
+        align-items: center;
         margin: 35px;
         text-decoration: none;
         
         span {
-            font-weight: bold;
+            font-size: 15px;
+            font-weight: 500;
             color: #385185;
+            margin-left: 5px;
         }
     `
 
@@ -99,6 +108,7 @@ const Login = () => {
         display: flex;
         justify-content: center;
         margin: 20px 0px;
+        font-size: 15px;
 
         a {
             text-decoration: none;
@@ -113,6 +123,7 @@ const Login = () => {
                 <TopBox>
                     <LogoContainer>
                         <FontAwesomeIcon icon={faInstagram} size="3x" />
+                        <h1>instaclone</h1>
                     </LogoContainer>
                     
                     <form>
