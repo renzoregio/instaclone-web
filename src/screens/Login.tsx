@@ -25,7 +25,7 @@ const Login = () => {
 
     const WhiteBox = styled.div`
         background-color: white;
-        border: 1px solid rgb(219, 219, 219);
+        border: 1px solid ${props => props.theme.borderColor};
     `
 
     const Separator = styled.div`
@@ -33,10 +33,10 @@ const Login = () => {
         justify-content: space-evenly; 
         align-items: center;
         width: 90%;
-        margin-top: 5px;
+        margin-top: 12px;
         div {
             background-color: #ededed;
-            height: 2px;
+            height: 1px;
             width: 100%;
         }
 
@@ -54,38 +54,38 @@ const Login = () => {
         flex-direction: column;
         align-items: center;
         padding: 20px;
-        height: 385px;
+        height: 380px;
         
 
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
-            
-            input {
-                padding: 5px 8px;
-                width: 258px;
-                height: 36px;
-                margin: 5px 28px; 
-                border-radius: 5px;
-            }
-
-            input[type="text"], input[type="password"] {
-                background: #fafafa;
-                border: 1px solid #eaeaea;
-                
-            }
-
-            input[type="submit"]{
-                background: #007fd4;
-                border: 1px solid #007fd4;
-                color: white;
-                font-weight: bold;
-                margin: 15px;
-                width: 278px;
-                font-size: 15px;
-            }
         }
+    `
+
+    const TextInput = styled.input`
+        padding: 5px 8px;
+        width: 258px;
+        height: 36px;
+        margin: 5px 28px; 
+        border-radius: 5px;
+        background: #fafafa;
+        border: 1px solid ${props => props.theme.borderColor};
+    `
+
+    const Submit = styled.input`
+        background: ${props => props.theme.accent};
+        border: 1px solid ${props => props.theme.accent};
+        color: white;
+        font-weight: bold;
+        margin: 15px;
+        width: 258px;
+        font-size: 15px;
+        padding: 5px 8px;
+        height: 36px;
+        margin: 5px 28px; 
+        border-radius: 5px;
     `
     const LogInWithFacebookContainer = styled.a`
         display: flex; 
@@ -113,7 +113,8 @@ const Login = () => {
         a {
             text-decoration: none;
             margin-left: 5px;
-            color: #0395f6;
+            font-weight: 600;
+            color: ${props => props.theme.accent};
         }
     `
 
@@ -127,9 +128,9 @@ const Login = () => {
                     </LogoContainer>
                     
                     <form>
-                        <input type="text" placeholder="Username"/>
-                        <input type="password" placeholder="Password"/>
-                        <input type="submit" value="Log in"/>
+                        <TextInput type="text" placeholder="Username"/>
+                        <TextInput type="password" placeholder="Password"/>
+                        <Submit type="submit" value="Log in"/>
                     </form>
                     <Separator>
                         <div></div>
@@ -143,7 +144,7 @@ const Login = () => {
                 </TopBox>
                 <BottomBox>
                     <span>Don't have an account?</span>
-                    <a href="#">Sign up</a>
+                    <a href="/signup">Sign up</a>
                 </BottomBox>
             </Wrapper>
         </Container>
