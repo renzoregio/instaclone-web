@@ -1,45 +1,10 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
-import SeparatorTag from "./Separator";
-import ButtonTag from "./Button";
-import HeaderTag from "./Header";
-import TextInputTag from "./TextInput";
-import BottomBoxTag from "./BottomBox";
+import routes from "../routes"
+import { AuthLayout, FormBox, BottomBox, Input, Logo, Button, Divider } from "../components/auth"
 
 const Login = () => {
-
-    const Container = styled.div`
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    `
-
-    const Wrapper = styled.div`
-        width: 350px;
-    `
-
-    const WhiteBox = styled.div`
-        background-color: white;
-        border: 1px solid ${props => props.theme.borderColor};
-    `
-
-
-    const TopBox = styled(WhiteBox)`
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        height: 380px;
-        
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-    `
 
     const LogInWithFacebookContainer = styled.a`
         display: flex; 
@@ -58,24 +23,22 @@ const Login = () => {
     `
 
     return (
-        <Container>
-            <Wrapper>
-                <TopBox>
-                    <HeaderTag />
-                    <form>
-                        <TextInputTag inputType="text" inputPlaceholder="Username"/>
-                        <TextInputTag inputType="password" inputPlaceholder="Password"/>
-                        <ButtonTag content="Log in"/>
-                    </form>
-                    <SeparatorTag />
-                    <LogInWithFacebookContainer href="#">
-                        <FontAwesomeIcon icon={faFacebookSquare} color="#385185" />
-                        <span>Log in with Facebook</span>
-                    </LogInWithFacebookContainer>
-                </TopBox>
-                <BottomBoxTag context="Don't have an account?" slug="/sign-up" slugText="Sign Up" />
-            </Wrapper>
-        </Container>
+        <AuthLayout>
+            <FormBox>
+                <Logo />
+                <form>
+                    <Input inputType="text" inputPlaceholder="Username"/>
+                    <Input inputType="password" inputPlaceholder="Password"/>
+                    <Button content="Log in"/>
+                </form>
+                <Divider />
+                <LogInWithFacebookContainer href="#">
+                    <FontAwesomeIcon icon={faFacebookSquare} color="#385185" />
+                    <span>Log in with Facebook</span>
+                </LogInWithFacebookContainer>
+            </FormBox>
+            <BottomBox context="Don't have an account?" slug={routes.signUp} slugText="Sign Up" />
+        </AuthLayout>
     )
 }
 

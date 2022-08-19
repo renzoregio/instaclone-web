@@ -2,12 +2,14 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
-const HeaderTag = () => {
+const Logo = () => {
     const LogoContainer = styled.div`
         margin: 20px;
         display: flex;
         align-items: center;
-        h1 {
+        span {
+            font-size: 27px;
+            font-weight: bold;
             margin-left: 15px;
         }
     `
@@ -16,9 +18,9 @@ const HeaderTag = () => {
     return (
         <LogoContainer>
             <FontAwesomeIcon icon={faInstagram} size="2x" />
-            <h1>instaclone</h1>
+            <span>instaclone</span>
         </LogoContainer>
     )
 }
 
-export default HeaderTag;
+export default Logo;

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { isDarkModeThemeVar } from "../apollo";
-// import { isLoggedInVar } from "../apollo";
 
 const Home = () => {
 

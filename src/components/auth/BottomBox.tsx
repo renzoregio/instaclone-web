@@ -1,13 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { BaseBox } from "../shared";
 
-const BottomBoxTag = ({ context, slug, slugText } : { context: string, slug: string, slugText: string }) => {
-    const WhiteBox = styled.div`
-        background-color: white;
-        border: 1px solid ${props => props.theme.borderColor};
-    `
-
-    const BottomBox = styled(WhiteBox)`
+const BottomBox = ({ context, slug, slugText } : { context: string, slug: string, slugText: string }) => {
+    
+    const BottomBox = styled(BaseBox)`
         padding: 20px;
         display: flex;
         justify-content: center;
@@ -29,4 +26,4 @@ const BottomBoxTag = ({ context, slug, slugText } : { context: string, slug: str
     )
 }
 
-export default BottomBoxTag;
+export default BottomBox;

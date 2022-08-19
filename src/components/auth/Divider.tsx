@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const SeparatorTag = () => {
+const Divider = () => {
 
-    const Separator = styled.div`
+    const Divider = styled.div`
         display: flex;
         justify-content: space-evenly; 
         align-items: center;
@@ -25,12 +25,12 @@ const SeparatorTag = () => {
     `
 
     return (
-        <Separator>
+        <Divider>
             <div></div>
             <span>or</span>
             <div></div>
-        </Separator>
+        </Divider>
     )
 }
 
-export default SeparatorTag;
+export default Divider;

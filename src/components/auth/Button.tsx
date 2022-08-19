@@ -1,8 +1,8 @@
-import { faFacebookF, faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
+import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
-const ButtonTag = ({ content, isDiv } : { content : any, isDiv? : boolean,  }) => {
+const Button = ({ content, isDiv } : { content : any, isDiv? : boolean,  }) => {
    
     const Button = styled.input`
         background: ${props => props.theme.accent};
@@ -17,9 +17,10 @@ const ButtonTag = ({ content, isDiv } : { content : any, isDiv? : boolean,  }) =
         margin: 5px 28px; 
         border-radius: 5px;
         margin: 20px 0px;
+        cursor: pointer;
     `
 
-    const BtnContainer = styled.div`
+    const BtnContainer = styled.button`
         display: flex;
         align-items:center;
         justify-content: center;
@@ -35,7 +36,7 @@ const ButtonTag = ({ content, isDiv } : { content : any, isDiv? : boolean,  }) =
         margin: 5px 28px; 
         border-radius: 5px;
         margin: 20px 0px;
-
+        cursor: pointer;
         span {
             margin-left: 7px;
         }
@@ -55,4 +56,4 @@ const ButtonTag = ({ content, isDiv } : { content : any, isDiv? : boolean,  }) =
     )
 }
 
-export default ButtonTag;
+export default Button;
