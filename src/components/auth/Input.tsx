@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-const Input = ({ inputType, inputPlaceholder } : { inputType : string , inputPlaceholder : string }) => {
-    const TextInput = styled.input`
+const TextInput = styled.input`
         padding: 5px 8px;
         width: 258px;
         height: 36px;
@@ -16,9 +15,10 @@ const Input = ({ inputType, inputPlaceholder } : { inputType : string , inputPla
         }
     `
 
-    return(
-        <TextInput type={inputType} placeholder={inputPlaceholder} />
-    )
+const Input = ({ type, placeholder, ...rest } : { type : string , placeholder : string }) => {
+
+    return <TextInput type={type} placeholder={placeholder} {...rest} />
+    
 }
 
 export default Input;

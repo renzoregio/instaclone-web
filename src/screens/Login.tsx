@@ -4,9 +4,7 @@ import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import routes from "../routes"
 import { AuthLayout, FormBox, BottomBox, Input, Logo, Button, Divider } from "../components/auth"
 
-const Login = () => {
-
-    const LogInWithFacebookContainer = styled.a`
+const LogInWithFacebookContainer = styled.a`
         display: flex; 
         justify-content: space-evenly;
         width: 60%;
@@ -22,13 +20,15 @@ const Login = () => {
         }
     `
 
+const Login = () => {
+    
     return (
         <AuthLayout>
             <FormBox>
                 <Logo />
                 <form>
-                    <Input inputType="text" inputPlaceholder="Username"/>
-                    <Input inputType="password" inputPlaceholder="Password"/>
+                    <Input type="text" placeholder="Username"/>
+                    <Input type="password" placeholder="Password"/>
                     <Button content="Log in"/>
                 </form>
                 <Divider />

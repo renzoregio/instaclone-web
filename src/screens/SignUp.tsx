@@ -11,10 +11,10 @@ const SignUp = () => {
                 <Button content="Log in with Facebook" isDiv={true} />
                 <Divider />
                 <form>
-                    <Input inputType="text" inputPlaceholder="Email" />
-                    <Input inputType="text" inputPlaceholder="Full Name" />
-                    <Input inputType="text" inputPlaceholder="Username" />
-                    <Input inputType="password" inputPlaceholder="Password" />
+                    <Input type="text" placeholder="Email" />
+                    <Input type="text" placeholder="Full Name" />
+                    <Input type="text" placeholder="Username" />
+                    <Input type="password" placeholder="Password" />
                     <span>People who use our service may have uploaded your contact information to Instagram. <b>Learn More</b></span>
                     <span>By signing up, you agree to our <b>Terms, Privacy Policy</b> and <b>Cookies Policy.</b></span>
                     <Button content="Sign up" />
