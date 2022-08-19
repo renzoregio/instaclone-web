@@ -1,4 +1,3 @@
-
 import routes from "../routes";
 import { AuthLayout, FormBox, BottomBox, Input, Logo, Button, Divider } from "../components/auth"
 
@@ -12,7 +11,7 @@ const SignUp = () => {
                 <Button content="Log in with Facebook" isDiv={true} />
                 <Divider />
                 <form>
-                    <Input inputType="text" inputPlaceholder="Mobile Number or Email" />
+                    <Input inputType="text" inputPlaceholder="Email" />
                     <Input inputType="text" inputPlaceholder="Full Name" />
                     <Input inputType="text" inputPlaceholder="Username" />
                     <Input inputType="password" inputPlaceholder="Password" />
@@ -21,7 +20,7 @@ const SignUp = () => {
                     <Button content="Sign up" />
                 </form>
             </FormBox>
-            <BottomBox context="Have an account?" slug={routes.home}slugText="Log in" />
+            <BottomBox context="Have an account?" slug={routes.home} slugText="Log in" />
         </AuthLayout>
     )
 }

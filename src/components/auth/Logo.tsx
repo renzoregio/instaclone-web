@@ -9,8 +9,8 @@ const Logo = () => {
         align-items: center;
         span {
             font-size: 27px;
-            font-weight: bold;
             margin-left: 15px;
+            font-family: Pacifico;
         }
     `
 
@@ -18,7 +18,7 @@ const Logo = () => {
     return (
         <LogoContainer>
             <FontAwesomeIcon icon={faInstagram} size="2x" />
-            <span>instaclone</span>
+            <span>Instaclone</span>
         </LogoContainer>
     )
 }
