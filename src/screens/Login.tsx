@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import routes from "../routes"
 import { AuthLayout, FormBox, BottomBox, Input, Logo, Button, Divider } from "../components/auth"
+import PageTitle from "../components/PageTitle";
 
 const LogInWithFacebookContainer = styled.a`
         display: flex; 
@@ -24,6 +25,7 @@ const Login = () => {
     
     return (
         <AuthLayout>
+            <PageTitle pageTitle="Login" />
             <FormBox>
                 <Logo />
                 <form>

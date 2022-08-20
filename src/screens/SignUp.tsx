@@ -1,10 +1,12 @@
 import routes from "../routes";
 import { AuthLayout, FormBox, BottomBox, Input, Logo, Button, Divider } from "../components/auth"
+import PageTitle from "../components/PageTitle";
 
 const SignUp = () => {
 
     return (
         <AuthLayout>
+            <PageTitle pageTitle="Sign Up" />
             <FormBox>
                 <Logo />
                 <h1>Sign up to see photos and videos from your friends</h1>
