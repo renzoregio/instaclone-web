@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import routes from "../routes"
-import { AuthLayout, FormBox, BottomBox, Input, Logo, Button, Divider } from "../components/auth"
+import { AuthLayout, FormBox, BottomBox, Input, Logo, Button, Divider, FormError } from "../components/auth"
 import PageTitle from "../components/PageTitle";
-import { FieldValues, Resolver, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const LogInWithFacebookContainer = styled.a`
         display: flex; 
@@ -35,20 +35,16 @@ const Login = () => {
         // console.log("VALID", data)
     }
 
-    const isInvalidSubmit = (data : any) => {
-        // console.log("INVALID", data)
-    }
-
     return (
         <AuthLayout>
             <PageTitle pageTitle="Login" />
             <FormBox>
                 <Logo />
-                <form onSubmit={handleSubmit(isValidSubmit, isInvalidSubmit)}>
-                    <Input type="text" register={register} validations={{required: "Username is required", minLength: { value: 5, message: "Username must be at least 5 characters."}}} name="username" placeholder="Username" />
-                    {errors?.username && <span>{errors?.username.message}</span>}
-                    <Input type="password" register={register} name="password" placeholder="Password" validations={{required: "Password is required"}} />
-                    {errors?.password && <span>{errors.password.message}</span>}
+                <form onSubmit={handleSubmit(isValidSubmit)}>
+                    <Input type="text" register={register} hasError={errors?.username?.message ? true : false} validations={{required: "Username is required", minLength: { value: 5, message: "Username must be at least 5 characters."}}} name="username" placeholder="Username"/>
+                    {errors?.username && <FormError errorText={errors.username.message!}/>}
+                    <Input type="password" register={register} hasError={errors?.password?.message ? true : false } name="password" placeholder="Password" validations={{required: "Password is required"}} />
+                    {errors?.password && <FormError errorText={errors.password.message!}/>}
                     <Button content="Log in" disabled={isValid} />
                 </form>
                 <Divider />
