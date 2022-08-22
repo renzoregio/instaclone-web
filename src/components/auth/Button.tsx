@@ -16,44 +16,16 @@ const Btn = styled.input`
     border-radius: 5px;
     margin: 20px 0px;
     cursor: pointer;
-`
-
-const BtnContainer = styled.button`
-    display: flex;
-    align-items:center;
+    display: flex; 
     justify-content: center;
-    background: ${props => props.theme.accent};
-    border: 1px solid ${props => props.theme.accent};
-    color: white;
-    font-weight: bold;
-    margin: 15px;
-    width: 258px;
-    font-size: 15px;
-    padding: 5px 8px;
-    height: 36px;
-    margin: 5px 28px; 
-    border-radius: 5px;
-    margin: 20px 0px;
-    cursor: pointer;
-    span {
-        margin-left: 7px;
-    }
+    align-items: center;
+    opacity: ${props => !props.disabled ? "0.2" : "1"};
 `
 
-const Button = ({ content, isDiv } : { content : any, isDiv? : boolean,  }) => {
-
+const Button = ({ content, disabled } : { content : string, disabled?: boolean }) => {
     return(
-       <>
-       {!isDiv ? (
-        <Btn type="submit" value={content}/>
-       ) : 
-        <BtnContainer>
-            <FontAwesomeIcon icon={faFacebookSquare} />
-            <span>Log in with Facebook</span>
-        </BtnContainer>
-        }
-        </>
-    )
+        <Btn type="submit" value={content} disabled={disabled} />
+    ) 
 }
 
 export default Button;

@@ -4,6 +4,7 @@ import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import routes from "../routes"
 import { AuthLayout, FormBox, BottomBox, Input, Logo, Button, Divider } from "../components/auth"
 import PageTitle from "../components/PageTitle";
+import { FieldValues, Resolver, useForm } from "react-hook-form";
 
 const LogInWithFacebookContainer = styled.a`
         display: flex; 
@@ -21,17 +22,34 @@ const LogInWithFacebookContainer = styled.a`
         }
     `
 
+export type LoginFormValues = {
+    username: string,
+    password: string
+}
+
+
 const Login = () => {
+    const { register, handleSubmit, formState: { errors, isValid } }  = useForm<LoginFormValues>({ mode: "onChange" })
     
+    const isValidSubmit = (data : any) => {
+        // console.log("VALID", data)
+    }
+
+    const isInvalidSubmit = (data : any) => {
+        // console.log("INVALID", data)
+    }
+
     return (
         <AuthLayout>
             <PageTitle pageTitle="Login" />
             <FormBox>
                 <Logo />
-                <form>
-                    <Input type="text" placeholder="Username"/>
-                    <Input type="password" placeholder="Password"/>
-                    <Button content="Log in"/>
+                <form onSubmit={handleSubmit(isValidSubmit, isInvalidSubmit)}>
+                    <Input type="text" register={register} validations={{required: "Username is required", minLength: { value: 5, message: "Username must be at least 5 characters."}}} name="username" placeholder="Username" />
+                    {errors?.username && <span>{errors?.username.message}</span>}
+                    <Input type="password" register={register} name="password" placeholder="Password" validations={{required: "Password is required"}} />
+                    {errors?.password && <span>{errors.password.message}</span>}
+                    <Button content="Log in" disabled={isValid} />
                 </form>
                 <Divider />
                 <LogInWithFacebookContainer href="#">

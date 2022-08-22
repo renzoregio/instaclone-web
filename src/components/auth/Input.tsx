@@ -1,4 +1,7 @@
+import { FieldValues, Resolver, UseFormRegister } from "react-hook-form";
 import styled from "styled-components";
+import { LoginFormValues } from "../../screens/Login";
+
 
 const TextInput = styled.input`
         padding: 5px 8px;
@@ -13,11 +16,23 @@ const TextInput = styled.input`
         ::placeholder {
             font-size: 12px;
         }
+
+        &:focus {
+            border: 1px solid rgb(38, 38, 38)
+        }
     `
 
-const Input = ({ type, placeholder, ...rest } : { type : string , placeholder : string }) => {
+interface IValidationObj {
+    required?: boolean | string,
+    minLength?: {
+        value: number,
+        message: string
+    },
+}
 
-    return <TextInput type={type} placeholder={placeholder} {...rest} />
+const Input = ({ type, placeholder, register, name, validations, ...rest } : { type : string , placeholder : string, register: UseFormRegister<LoginFormValues>, name: "username" | "password", validations?: IValidationObj  }) => {
+
+    return <TextInput type={type} {...register(name, validations)} placeholder={placeholder} {...rest} />
     
 }
 
