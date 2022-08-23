@@ -17,7 +17,7 @@ const Btn = styled.input`
     display: flex; 
     justify-content: center;
     align-items: center;
-    opacity: ${props => !props.disabled ? "0.2" : "1"};
+    opacity: ${props => props.disabled ? "0.2" : "1"};
 `
 
 const Button = ({ content, disabled } : { content : string, disabled?: boolean }) => {

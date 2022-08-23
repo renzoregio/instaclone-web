@@ -16,7 +16,7 @@ const DividerStyle = styled.div`
     span {
         color: #959393d9;
         text-transform: uppercase;
-        margin: 0px 25px;
+        margin: 10px 25px;
         font-size: 14px;
         font-weight: bold;
     }

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { isDarkModeThemeVar } from "../apollo";
+import { isDarkModeThemeVar, logUserOut } from "../apollo";
 
 const Home = () => {
 
@@ -37,6 +37,7 @@ const Home = () => {
     return (
         <Container>
             <Title >Home Screen</Title>
+            <button onClick={logUserOut}>Log out</button>
             <Button onClick={switchTheme}>{isDarkModeThemeVar() ? "Light" : "Dark"} Mode</Button>
         </Container>
     )

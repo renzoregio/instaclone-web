@@ -33,8 +33,8 @@ interface IValidationObj {
     },
 }
 
-const Input = ({ type, placeholder, register, name, validations, hasError, ...rest } : { type : string , placeholder : string, register: UseFormRegister<LoginFormValues>, name: "username" | "password", validations?: IValidationObj, hasError?: boolean  }) => {
-    return <TextInput type={type} {...register(name, validations)} placeholder={placeholder} hasError={hasError} {...rest} />
+const Input = ({ type, placeholder, register, name, validations, hasError, onFocus, ...rest } : { type : string , placeholder : string, register: UseFormRegister<LoginFormValues>, name: "username" | "password", validations?: IValidationObj, hasError?: boolean, onFocus? : any  }) => {
+    return <TextInput type={type} {...register(name, validations)} placeholder={placeholder} hasError={hasError} onFocus={onFocus} {...rest} />
     
 }
 
