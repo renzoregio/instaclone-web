@@ -1,7 +1,6 @@
 import { UseFormRegister } from "react-hook-form";
 import styled from "styled-components";
-import { LoginFormValues } from "../../screens/Login";
-
+import { FormValues } from "../../screens/Login";
 interface ITextInput {
     hasError?: boolean;
 }
@@ -33,7 +32,17 @@ interface IValidationObj {
     },
 }
 
-const Input = ({ type, placeholder, register, name, validations, hasError, onFocus, ...rest } : { type : string , placeholder : string, register: UseFormRegister<LoginFormValues>, name: "username" | "password", validations?: IValidationObj, hasError?: boolean, onFocus? : any  }) => {
+interface IInput {
+    type : string , 
+    placeholder : string, 
+    register: UseFormRegister<FormValues>, 
+    name: "username" | "password" | "firstName" | "lastName" | "email", 
+    validations?: IValidationObj, 
+    hasError?: boolean, 
+    onFocus? : any  
+}
+
+const Input = ({ type, placeholder, register, name, validations, hasError, onFocus, ...rest } : IInput) => {
     return <TextInput type={type} {...register(name, validations)} placeholder={placeholder} hasError={hasError} onFocus={onFocus} {...rest} />
     
 }

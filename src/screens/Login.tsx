@@ -24,9 +24,12 @@ const LogInWithFacebookContainer = styled.a`
         }
     `
 
-export type LoginFormValues = {
+export type FormValues = {
+    firstName: string,
+    lastName: string,
+    email: string,
     username: string,
-    password: string
+    password: string,
     result: string
 }
 
@@ -43,7 +46,7 @@ const LOGIN_MUTATION = gql`
 
 
 const Login = () => {
-    const { register, handleSubmit, formState: { errors, isValid }, getValues, setError, clearErrors }  = useForm<LoginFormValues>({ mode: "onChange" })
+    const { register, handleSubmit, formState: { errors, isValid }, getValues, setError, clearErrors }  = useForm<FormValues>({ mode: "onChange" })
     const clearLoginErrors = () => clearErrors("result")
     const onCompleted = (data : any) => {
         const { login: {ok, token, error}} = data;
