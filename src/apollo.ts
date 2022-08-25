@@ -1,4 +1,6 @@
 import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client"
+import { NavigateFunction } from "react-router-dom";
+import routes from "./routes";
 
 const AUTHORIZATION = "authorization";
 
@@ -15,7 +17,8 @@ export const logUserIn = (authorization : string) => {
     isLoggedInVar(true);
 }
 
-export const logUserOut = () => {
+export const logUserOut = (navigate: NavigateFunction) => {
     localStorage.removeItem(AUTHORIZATION);
+    navigate(routes.home, { replace: true });
     isLoggedInVar(false);
 }

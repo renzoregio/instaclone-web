@@ -1,17 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { isDarkModeThemeVar, logUserOut } from "../apollo";
-
-const Home = () => {
-
-    const switchTheme = () => {
-        if(isDarkModeThemeVar()){
-            isDarkModeThemeVar(false);
-        } else {
-            isDarkModeThemeVar(true);
-        }
-    }
-
-    const Container = styled.div`
+const Container = styled.div`
         display: flex;
         justify-content: space-evenly;
         align-items: center;
@@ -33,11 +23,20 @@ const Home = () => {
         padding: 20px;
         box-shadow: 0px 5px;
     `
+const Home = () => {
+    const navigate = useNavigate();
+    const switchTheme = () => {
+        if(isDarkModeThemeVar()){
+            isDarkModeThemeVar(false);
+        } else {
+            isDarkModeThemeVar(true);
+        }
+    }
 
     return (
         <Container>
             <Title >Home Screen</Title>
-            <button onClick={logUserOut}>Log out</button>
+            <button onClick={() => logUserOut(navigate)}>Log out</button>
             <Button onClick={switchTheme}>{isDarkModeThemeVar() ? "Light" : "Dark"} Mode</Button>
         </Container>
     )

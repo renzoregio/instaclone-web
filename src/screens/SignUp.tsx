@@ -4,7 +4,6 @@ import PageTitle from "../components/PageTitle";
 import { useForm } from "react-hook-form";
 import { FormValues } from "./Login";
 import { gql, useMutation } from "@apollo/client";
-import { logUserIn } from "../apollo";
 import { useNavigate } from "react-router-dom";
 
 const CREATE_ACCOUNT_MUTATION = gql`
@@ -18,8 +17,9 @@ const CREATE_ACCOUNT_MUTATION = gql`
 
 const SignUp = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors, isValid }, setError, clearErrors } = useForm<FormValues>({ mode: "onChange" });
+    const { register, handleSubmit, formState: { errors, isValid }, setError, clearErrors, getValues } = useForm<FormValues>({ mode: "onChange" });
     const clearSignUpErrors = () => clearErrors("result")
+    const { username, password } = getValues();
     const onCompleted = (data : any) => {
         const { createAccount: { ok, error }} = data;
         if(!ok){
@@ -27,7 +27,11 @@ const SignUp = () => {
                 message: error
             });
         }
-        navigate(routes.home)
+        navigate(routes.home, {state: { 
+            postMessage: "Account has successfully been created. Please login.",
+            username,
+            password
+        }})
 
     }
     const [signUp, { loading }] = useMutation(CREATE_ACCOUNT_MUTATION, { onCompleted  })

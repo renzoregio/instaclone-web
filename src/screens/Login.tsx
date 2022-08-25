@@ -7,6 +7,7 @@ import PageTitle from "../components/PageTitle";
 import { useForm } from "react-hook-form";
 import { gql, useMutation } from "@apollo/client";
 import { logUserIn } from "../apollo";
+import { useLocation } from "react-router-dom";
 
 const LogInWithFacebookContainer = styled.a`
         display: flex; 
@@ -43,10 +44,22 @@ const LOGIN_MUTATION = gql`
     }
 `
 
+const Notification = styled.div`
+    color: #2ecc71;
+    font-size: 15px;
+    margin: 10px 25px;
+`
 
+interface LocationState {
+    postMessage: string,
+    username: string,
+    password: string
+}
 
 const Login = () => {
-    const { register, handleSubmit, formState: { errors, isValid }, getValues, setError, clearErrors }  = useForm<FormValues>({ mode: "onChange" })
+    const { state } = useLocation();
+    const locationState = state as LocationState;
+    const { register, handleSubmit, formState: { errors, isValid }, getValues, setError, clearErrors }  = useForm<FormValues>({ mode: "onChange", defaultValues: { username: locationState?.username || "", password: locationState?.password || ""} })
     const clearLoginErrors = () => clearErrors("result")
     const onCompleted = (data : any) => {
         const { login: {ok, token, error}} = data;
@@ -78,6 +91,7 @@ const Login = () => {
             <PageTitle pageTitle="Login" />
             <FormBox>
                 <Logo />
+                {locationState?.postMessage && <Notification>{locationState.postMessage}</Notification>}
                 <form onSubmit={handleSubmit(isValidSubmit)}>
                     <Input onFocus={clearLoginErrors} type="text" register={register} hasError={errors?.username?.message ? true : false} validations={{required: "Username is required", minLength: { value: 5, message: "Username must be at least 5 characters."}}} name="username" placeholder="Username"/>
                     {errors?.username && <FormError errorText={errors.username.message!}/>}
