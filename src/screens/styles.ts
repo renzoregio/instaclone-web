@@ -1,16 +1,16 @@
 import { createGlobalStyle, DefaultTheme } from "styled-components"
  
 export const lightModeTheme: DefaultTheme = {
-    backgroundColor: "whitesmoke",
-    textColor: "black",
+    backgroundColor: "#FAFAFA",
+    textColor: "rgb(38, 38, 38)",
     accent: "#0095f6",
     borderColor:"rgb(219, 219, 219)"
   }
 
 export const darkModeTheme: DefaultTheme = {
-    backgroundColor: "black",
+    backgroundColor: "#2c2c2c",
     textColor: "white",
-    accent: "",
+    accent: "gray",
     borderColor: ""
 }
 

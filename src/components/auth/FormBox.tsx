@@ -8,7 +8,7 @@ const Container = styled(BaseBox)`
     align-items: center;
     padding: 20px;  
     text-align: center;      
-
+    
     h1 {
         margin: 0px;
         color: #8e8e8e;

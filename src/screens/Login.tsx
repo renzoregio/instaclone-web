@@ -4,7 +4,7 @@ import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import routes from "../routes"
 import { AuthLayout, FormBox, BottomBox, Input, Logo, Button, Divider, FormError } from "../components/auth"
 import PageTitle from "../components/PageTitle";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { gql, useMutation } from "@apollo/client";
 import { logUserIn } from "../apollo";
 import { useLocation } from "react-router-dom";
@@ -73,11 +73,10 @@ const Login = () => {
     }
     const [login, { loading }] = useMutation(LOGIN_MUTATION, { onCompleted })
 
-    const isValidSubmit = (data : any) => {
+    const isValidSubmit = () => {
         if(loading){
             return 
         }
-
         const { username: userName, password } = getValues();
         login({
             variables: {
