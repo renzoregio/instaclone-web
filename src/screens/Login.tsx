@@ -4,10 +4,12 @@ import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import routes from "../routes"
 import { AuthLayout, FormBox, BottomBox, Input, Logo, Button, Divider, FormError } from "../components/auth"
 import PageTitle from "../components/PageTitle";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { gql, useMutation } from "@apollo/client";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@apollo/client";
 import { logUserIn } from "../apollo";
 import { useLocation } from "react-router-dom";
+import { LOGIN_MUTATION } from "../mutations/auth";
+import { FormValues, LocationState } from "../types/auth";
 
 const LogInWithFacebookContainer = styled.a`
         display: flex; 
@@ -25,36 +27,11 @@ const LogInWithFacebookContainer = styled.a`
         }
     `
 
-export type FormValues = {
-    firstName: string,
-    lastName: string,
-    email: string,
-    username: string,
-    password: string,
-    result: string
-}
-
-const LOGIN_MUTATION = gql`
-    mutation login($userName: String!, $password: String!){
-        login(userName: $userName, password: $password){
-            ok
-            token
-            error
-        }
-    }
-`
-
 const Notification = styled.div`
     color: #2ecc71;
     font-size: 15px;
     margin: 10px 25px;
 `
-
-interface LocationState {
-    postMessage: string,
-    username: string,
-    password: string
-}
 
 const Login = () => {
     const { state } = useLocation();

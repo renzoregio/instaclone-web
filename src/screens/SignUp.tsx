@@ -2,18 +2,11 @@ import routes from "../routes";
 import { AuthLayout, FormBox, BottomBox, Input, Logo, Button, Divider, FormError } from "../components/auth"
 import PageTitle from "../components/PageTitle";
 import { useForm } from "react-hook-form";
-import { FormValues } from "./Login";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
+import { CREATE_ACCOUNT_MUTATION } from "../mutations/auth";
+import { FormValues } from "../types/auth";
 
-const CREATE_ACCOUNT_MUTATION = gql`
-    mutation createAccount($firstName: String!, $lastName: String, $userName: String!, $email: String!, $password: String!){
-        createAccount(firstName: $firstName, lastName: $lastName, userName: $userName, email: $email, password: $password){
-            ok
-            error
-        }
-    }
-`
 
 const SignUp = () => {
     const navigate = useNavigate();
