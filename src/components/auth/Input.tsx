@@ -1,6 +1,6 @@
 import { UseFormRegister } from "react-hook-form";
 import styled from "styled-components";
-import { FormValues } from "../../screens/Login";
+import { FormValues } from "../../types/auth";
 interface ITextInput {
     hasError?: boolean;
 }
