@@ -1,16 +1,31 @@
-import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client"
+import { ApolloClient, createHttpLink, InMemoryCache, makeVar } from "@apollo/client"
 import { NavigateFunction } from "react-router-dom";
 import routes from "./routes";
+import { setContext } from '@apollo/client/link/context';
+
 
 const AUTHORIZATION = "authorization";
 const DARK_MODE = "darkMode"
 
+const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem(AUTHORIZATION)
+    return {
+        headers: {
+            ...headers,
+            authorization: token
+        }
+    }
+})
+
+const httpLink = createHttpLink({
+    uri: "http://localhost:4000/graphql",
+})
 export const isLoggedInVar = makeVar(Boolean(localStorage.getItem(AUTHORIZATION)));
 export const isDarkModeThemeVar = makeVar(Boolean(localStorage.getItem(DARK_MODE)));
 export const client = new ApolloClient({
-    uri: "http://localhost:4000/graphql",
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
-    connectToDevTools: true
+    connectToDevTools: true,
 })
 
 export const logUserIn = (authorization : string) => {

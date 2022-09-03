@@ -1,7 +1,12 @@
+import { useReactiveVar } from "@apollo/client";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faCompass, faHome, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { isLoggedInVar } from "../apollo";
+import useUser from "../hooks/useUser";
+import routes from "../routes";
 
 const Container = styled.div`
     display: flex;
@@ -33,7 +38,19 @@ const Icon = styled.div`
     margin-left: 15px;
 `
 
+const Button = styled.button`
+    background-color: ${props => props.theme.accent};
+    color: white;
+    font-weight: 600;
+    border: 0px;
+    padding: 5px 15px;
+    border-radius: 3px;
+`
+
 const Header  = () => {
+    const isLoggedIn = useReactiveVar(isLoggedInVar)
+    const loggedInUser = useUser();
+    console.log(loggedInUser)
     return(
         <Container>
             <Wrapper>
@@ -41,15 +58,23 @@ const Header  = () => {
                     <FontAwesomeIcon icon={faInstagram} size="2x"/>
                 </Column>
                 <Column>
-                    <Icon> 
-                        <FontAwesomeIcon icon={faHome} size="lg" />
-                    </Icon>
-                    <Icon>
-                        <FontAwesomeIcon icon={faCompass} size="lg" />
-                    </Icon>
-                    <Icon>
-                        <FontAwesomeIcon icon={faUser} size="lg" />
-                    </Icon> 
+                    { isLoggedIn ?
+                    <>
+                        <Icon> 
+                            <FontAwesomeIcon icon={faHome} size="lg" />
+                        </Icon>
+                        <Icon>
+                            <FontAwesomeIcon icon={faCompass} size="lg" />
+                        </Icon>
+                        <Icon>
+                            <FontAwesomeIcon icon={faUser} size="lg" />
+                        </Icon>
+                    </>  :
+
+                    <Link to={routes.home}>
+                        <Button>Login</Button>
+                    </Link>
+                    }
                 </Column>
             </Wrapper>
         </Container>

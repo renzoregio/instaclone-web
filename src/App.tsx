@@ -20,7 +20,7 @@ function App() {
             <GlobalStyles />
             <Router>
               <Routes>
-                <Route path={routes.home} element={ isLoggedIn ? <Layout> <Home /> </Layout> : <Login />} />
+                <Route path={routes.home} element={ isLoggedIn ? <Layout> <Home /> </Layout> :  <Login /> } />
                 { !isLoggedIn && <Route path={routes.signUp} element={ <SignUp /> } /> }
                 <Route path="*" element={<NotFound />}/>
               </Routes>
