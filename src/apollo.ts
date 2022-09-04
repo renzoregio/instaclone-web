@@ -35,6 +35,7 @@ export const logUserIn = (authorization : string) => {
 
 export const logUserOut = (navigate: NavigateFunction) => {
     localStorage.removeItem(AUTHORIZATION);
+    navigate(0);
     navigate(routes.home, { replace: true });
     isLoggedInVar(false);
 }

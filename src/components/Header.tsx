@@ -1,12 +1,13 @@
 import { useReactiveVar } from "@apollo/client";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { faCompass, faHome, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCompass, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { isLoggedInVar } from "../apollo";
 import useUser from "../hooks/useUser";
 import routes from "../routes";
+import Avatar from "./Avatar";
 
 const Container = styled.div`
     display: flex;
@@ -38,6 +39,11 @@ const Icon = styled.div`
     margin-left: 15px;
 `
 
+const IconContainer = styled.div`
+    display: flex;
+    align-items: center;
+`
+
 const Button = styled.button`
     background-color: ${props => props.theme.accent};
     color: white;
@@ -49,8 +55,8 @@ const Button = styled.button`
 
 const Header  = () => {
     const isLoggedIn = useReactiveVar(isLoggedInVar)
-    const loggedInUser = useUser();
-    console.log(loggedInUser)
+    const data = useUser();
+    const avatarUrl = data?.data?.getMyProfile.avatar
     return(
         <Container>
             <Wrapper>
@@ -59,7 +65,7 @@ const Header  = () => {
                 </Column>
                 <Column>
                     { isLoggedIn ?
-                    <>
+                    <IconContainer>
                         <Icon> 
                             <FontAwesomeIcon icon={faHome} size="lg" />
                         </Icon>
@@ -67,10 +73,10 @@ const Header  = () => {
                             <FontAwesomeIcon icon={faCompass} size="lg" />
                         </Icon>
                         <Icon>
-                            <FontAwesomeIcon icon={faUser} size="lg" />
+                            <Avatar url={avatarUrl} />
                         </Icon>
-                    </>  :
-
+                    </IconContainer>  
+                    :
                     <Link to={routes.home}>
                         <Button>Login</Button>
                     </Link>
