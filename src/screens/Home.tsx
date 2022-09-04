@@ -1,44 +1,70 @@
-import { useNavigate } from "react-router-dom";
+import { gql, useQuery } from "@apollo/client";
 import styled from "styled-components";
-import { isDarkModeThemeVar, logUserOut } from "../apollo";
-const Container = styled.div`
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        flex-direction: column;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-    `
+import Avatar from "../components/Avatar";
+import { FatText } from "../components/shared";
 
-    const Title = styled.h1`
-        font-size: 40px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    `
 
-    const Button = styled.button`
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0px 5px;
-    `
-const Home = () => {
-    const navigate = useNavigate();
-    const switchTheme = () => {
-        if(isDarkModeThemeVar()){
-            isDarkModeThemeVar(false);
-        } else {
-            isDarkModeThemeVar(true);
+const SEE_FEED_QUERY = gql`
+    query seeFeed {
+        seeFeed {
+            id
+            user {
+                userName
+                avatar
+            }
+            file
+            caption
+            likes
+            comments
+            isMyPhoto
+            createdAt
         }
     }
+`
 
+const PhotoContainer = styled.div`
+    background-color: white;
+    border: 1px solid ${props => props.theme.borderColor};
+    margin-bottom: 20px;
+`
+
+const PhotoHeader = styled.div`
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+`
+
+interface IPhoto {
+    id: string,
+    user: {
+        userName: string,
+        avatar: string
+    },
+    file: string,
+    caption: string,
+    likes: number,
+    isMyPhoto: boolean,
+    createdAt: string,
+    comments: number
+}
+
+const Username = styled(FatText)`
+    margin-left: 5px;
+`
+const Home = () => {
+    const { data } = useQuery(SEE_FEED_QUERY);
+    
     return (
-        <Container>
-            <Title >Home Screen</Title>
-            <button onClick={() => logUserOut(navigate)}>Log out</button>
-            <Button onClick={switchTheme}>{isDarkModeThemeVar() ? "Light" : "Dark"} Mode</Button>
-        </Container>
+        <div>
+            {data?.seeFeed.map((photo : IPhoto) => (
+                <PhotoContainer key={photo.id}> 
+                    <PhotoHeader>
+                        <Avatar url={photo.user.avatar} />
+                        <Username>{photo.user.userName}</Username>
+                    </PhotoHeader>
+                </PhotoContainer>
+            ))}
+        </div>
     )
 }
 

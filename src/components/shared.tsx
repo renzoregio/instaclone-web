@@ -5,3 +5,7 @@ export const BaseBox = styled.div`
         color: ${props => props.theme.textColor};
         border: 1px solid ${props => props.theme.borderColor};
 `
+
+export const FatText = styled.span`
+        font-weight: 600;
+`
