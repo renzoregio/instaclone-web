@@ -8,6 +8,7 @@ import { IPhoto } from "../../types/photo";
 import { useMutation } from "@apollo/client";
 import { TOGGLE_LIKE_MUTATION } from "../../mutations/photo";
 import { useEffect, useState } from "react";
+import { SEE_FEED_QUERY } from "../../queries/feed";
 
 const PhotoContainer = styled.div`
     background-color: white;
@@ -64,7 +65,7 @@ const Likes = styled(FatText)`
 
  const Photo = ({ id, user, file, caption, likes, isMyPhoto, createdAt, comments, isLiked} : IPhoto) => {
     const [likedPhoto, setLikedPhoto] = useState(false)
-    const [toggleLike] = useMutation(TOGGLE_LIKE_MUTATION)
+    const [toggleLike] = useMutation(TOGGLE_LIKE_MUTATION, { refetchQueries: [{query: SEE_FEED_QUERY}]})
     
 
     useEffect(() => {
