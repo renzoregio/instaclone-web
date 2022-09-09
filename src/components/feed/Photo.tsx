@@ -5,10 +5,9 @@ import { FatText } from "../shared";
 import { faBookmark, faComment, faHeart, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as SolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { IPhoto } from "../../types/photo";
-import { useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { TOGGLE_LIKE_MUTATION } from "../../mutations/photo";
 import { useEffect, useState } from "react";
-import { SEE_FEED_QUERY } from "../../queries/feed";
 
 const PhotoContainer = styled.div`
     background-color: white;
@@ -64,14 +63,31 @@ const Likes = styled(FatText)`
 
 
  const Photo = ({ id, user, file, caption, likes, isMyPhoto, createdAt, comments, isLiked} : IPhoto) => {
-    const [likedPhoto, setLikedPhoto] = useState(false)
-    const [toggleLike] = useMutation(TOGGLE_LIKE_MUTATION, { refetchQueries: [{query: SEE_FEED_QUERY}]})
+    const updateToggleLike = (cache : any, result : any) => {
+        const { data: { toggleLike: { ok }} } = result;
+        if(ok){
+            cache.writeFragment({
+                id: `Photo:${id}`,
+                fragment: gql`
+                    fragment updateIsLiked on Photo {
+                        isLiked
+                    }
+                `,
+                data: {
+                    isLiked: !isLiked
+                }
+
+            })
+        }
+    }
+
+  
+    const [toggleLike] = useMutation(TOGGLE_LIKE_MUTATION, { 
+        update: updateToggleLike
+     })
     
 
-    useEffect(() => {
-        setLikedPhoto(isLiked)
-    }, [isLiked])
-
+ 
     return (
         <PhotoContainer> 
             <PhotoHeader>
@@ -83,7 +99,7 @@ const Likes = styled(FatText)`
                 <PhotoActions>
                     <div>
                         <PhotoAction>
-                            <FontAwesomeIcon onClick={() => toggleLike({ variables: { photoId: id }})} icon={likedPhoto ? SolidHeart : faHeart} color={likedPhoto ? "tomato" : ""} size="2x" />
+                            <FontAwesomeIcon onClick={() => toggleLike({ variables: { photoId: id }})} icon={ isLiked ? SolidHeart : faHeart} color={isLiked ? "tomato" : ""} size="2x" />
                         </PhotoAction>
                         <PhotoAction>
                             <FontAwesomeIcon icon={faComment} size="2x" />
