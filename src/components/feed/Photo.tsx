@@ -65,16 +65,31 @@ const Likes = styled(FatText)`
  const Photo = ({ id, user, file, caption, likes, isMyPhoto, createdAt, comments, isLiked} : IPhoto) => {
     const updateToggleLike = (cache : any, result : any) => {
         const { data: { toggleLike: { ok }} } = result;
+
+        // readFragment test
+        // const res = cache.readFragment({
+        //     id: `Photo:${id}`,
+        //     fragment: gql`
+        //         fragment readPhotoLikesAndIsLiked on Photo {
+        //             likes
+        //             isLiked
+        //         }
+        //     `
+        // })
+
         if(ok){
             cache.writeFragment({
                 id: `Photo:${id}`,
                 fragment: gql`
-                    fragment updateIsLiked on Photo {
+                    fragment updateLikesAndIsLiked on Photo {
                         isLiked
+                        likes
+
                     }
                 `,
                 data: {
-                    isLiked: !isLiked
+                    isLiked: !isLiked,
+                    likes: !isLiked ? likes + 1 : likes - 1
                 }
 
             })
