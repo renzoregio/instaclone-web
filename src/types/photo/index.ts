@@ -22,3 +22,10 @@ export interface IComment {
     payload: string,
     createdAt: string,
 }
+
+export interface IComments {
+    user: string,
+    caption: string, 
+    comments: IComment[],
+    commentCount: number
+}

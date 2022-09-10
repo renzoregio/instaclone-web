@@ -5,6 +5,7 @@ import { FatText } from "../shared";
 import { faBookmark, faComment, faHeart, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as SolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { IPhoto } from "../../types/photo";
+import Comments from "./Comments";
 import { gql, useMutation } from "@apollo/client";
 import { TOGGLE_LIKE_MUTATION } from "../../mutations/photo";
 
@@ -59,27 +60,6 @@ const Likes = styled(FatText)`
     display: block;
     margin-top: 15px;
 `
-
-const Comments = styled.div`
-    margin-top: 20px;
-`
-
-const Comment = styled.div`
-    display: flex; 
-    align-items: center;
-`
-
-const CommentCaption = styled.span`
-    margin-left: 10px;
-`
-
-const CommentCount = styled.span`
-    opacity: 0.7;
-    display: block;
-    font-size: 12px;
-    font-weight: 700;
-    margin-top: 10px;
-`
  const Photo = ({ id, user, file, caption, likes, isMyPhoto, createdAt, comments, isLiked, commentCount} : IPhoto) => {
     const updateToggleLike = (cache : any, result : any) => {
         const { data: { toggleLike: { ok }} } = result;
@@ -117,9 +97,7 @@ const CommentCount = styled.span`
     const [toggleLike] = useMutation(TOGGLE_LIKE_MUTATION, { 
         update: updateToggleLike
      })
-    
 
- 
     return (
         <PhotoContainer> 
             <PhotoHeader>
@@ -145,13 +123,7 @@ const CommentCount = styled.span`
                     </div>
                 </PhotoActions>
                 <Likes>{likes ? likes : ""} {likes > 1 && "likes"} {likes === 1 && "like"}</Likes>
-                <Comments>
-                    <Comment>
-                        <FatText>{user.userName}</FatText>
-                        <CommentCaption>{caption}</CommentCaption>
-                    </Comment>
-                    <CommentCount>{commentCount === 1 ? "1 comment" : `${commentCount} comments`}</CommentCount>
-                </Comments>
+                <Comments user={user.userName} caption={caption} comments={comments} commentCount={commentCount} />
             </PhotoData>
         </PhotoContainer>
     )
