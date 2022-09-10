@@ -11,7 +11,17 @@ export const SEE_FEED_QUERY = gql`
             file
             caption
             likes
-            comments
+            commentCount
+            comments {
+                id
+                payload
+                isMyComment
+                createdAt
+                user {
+                    userName
+                    avatar
+                }
+            }
             isMyPhoto
             createdAt
             isLiked

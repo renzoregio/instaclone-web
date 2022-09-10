@@ -1,14 +1,24 @@
+interface User {
+    userName: string,
+    avatar: string
+}
 export interface IPhoto {
     id: string,
-    user: {
-        userName: string,
-        avatar: string
-    },
+    user: User,
     file: string,
     caption: string,
     likes: number,
     isMyPhoto: boolean,
     createdAt: string,
-    comments: number,
+    commentCount: number,
+    comments: IComment[],
     isLiked: boolean
+}
+
+export interface IComment {
+    id: string,
+    user: User,
+    isMyComment: boolean,
+    payload: string,
+    createdAt: string,
 }

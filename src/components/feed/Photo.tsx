@@ -7,7 +7,6 @@ import { faHeart as SolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { IPhoto } from "../../types/photo";
 import { gql, useMutation } from "@apollo/client";
 import { TOGGLE_LIKE_MUTATION } from "../../mutations/photo";
-import { useEffect, useState } from "react";
 
 const PhotoContainer = styled.div`
     background-color: white;
@@ -61,11 +60,29 @@ const Likes = styled(FatText)`
     margin-top: 15px;
 `
 
+const Comments = styled.div`
+    margin-top: 20px;
+`
 
- const Photo = ({ id, user, file, caption, likes, isMyPhoto, createdAt, comments, isLiked} : IPhoto) => {
+const Comment = styled.div`
+    display: flex; 
+    align-items: center;
+`
+
+const CommentCaption = styled.span`
+    margin-left: 10px;
+`
+
+const CommentCount = styled.span`
+    opacity: 0.7;
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 10px;
+`
+ const Photo = ({ id, user, file, caption, likes, isMyPhoto, createdAt, comments, isLiked, commentCount} : IPhoto) => {
     const updateToggleLike = (cache : any, result : any) => {
         const { data: { toggleLike: { ok }} } = result;
-
         // readFragment test
         // const res = cache.readFragment({
         //     id: `Photo:${id}`,
@@ -128,6 +145,13 @@ const Likes = styled(FatText)`
                     </div>
                 </PhotoActions>
                 <Likes>{likes ? likes : ""} {likes > 1 && "likes"} {likes === 1 && "like"}</Likes>
+                <Comments>
+                    <Comment>
+                        <FatText>{user.userName}</FatText>
+                        <CommentCaption>{caption}</CommentCaption>
+                    </Comment>
+                    <CommentCount>{commentCount === 1 ? "1 comment" : `${commentCount} comments`}</CommentCount>
+                </Comments>
             </PhotoData>
         </PhotoContainer>
     )
