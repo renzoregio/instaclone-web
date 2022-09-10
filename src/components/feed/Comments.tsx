@@ -1,19 +1,12 @@
 import styled from "styled-components"
 import { IComments } from "../../types/photo"
-import { FatText } from "../shared"
+import Comment from "./Comment"
 
 const CommentsContainer = styled.div`
     margin-top: 20px;
 `
 
-const Comment = styled.div`
-    display: flex; 
-    align-items: center;
-`
 
-const CommentCaption = styled.span`
-    margin-left: 10px;
-`
 
 const CommentCount = styled.span`
     opacity: 0.7;
@@ -28,16 +21,10 @@ const Comments = ({ user, caption, comments, commentCount } : IComments) => {
     
     return (
         <CommentsContainer>
-            <Comment>
-                <FatText>{user}</FatText>
-                <CommentCaption>{caption}</CommentCaption>
-            </Comment>
+            <Comment user={user} caption={caption} /> 
             <CommentCount>{commentCount === 1 ? "1 comment" : `${commentCount} comments`}</CommentCount>
             {comments.map(comment => (
-                <Comment>
-                    <FatText>{comment.user.userName}</FatText>
-                    <CommentCaption>{comment.payload}</CommentCaption>
-                </Comment>
+                <Comment key={comment.id} user={comment.user.userName} caption={comment.payload} />
             ))}
         </CommentsContainer>
     )

@@ -29,3 +29,8 @@ export interface IComments {
     comments: IComment[],
     commentCount: number
 }
+
+export interface ICommentComponent {
+    user: string,
+    caption: string
+}
