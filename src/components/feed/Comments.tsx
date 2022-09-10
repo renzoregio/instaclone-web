@@ -6,8 +6,6 @@ const CommentsContainer = styled.div`
     margin-top: 20px;
 `
 
-
-
 const CommentCount = styled.span`
     opacity: 0.7;
     display: block;
@@ -17,7 +15,6 @@ const CommentCount = styled.span`
 `
 
 const Comments = ({ user, caption, comments, commentCount } : IComments) => {
-    
     
     return (
         <CommentsContainer>
