@@ -25,13 +25,13 @@ export interface IComment {
 
 export interface IComments {
     photoId: string,
-    user: string,
+    user: User,
     caption: string, 
     comments: IComment[],
     commentCount: number
 }
 
 export interface ICommentComponent {
-    user: string,
+    user: User,
     caption: string
 }

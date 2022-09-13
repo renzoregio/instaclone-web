@@ -6,7 +6,7 @@ import { faBookmark, faComment, faHeart, faPaperPlane } from "@fortawesome/free-
 import { faHeart as SolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { IPhoto } from "../../types/photo";
 import Comments from "./Comments";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { TOGGLE_LIKE_MUTATION } from "../../mutations/photo";
 
 const PhotoContainer = styled.div`
@@ -120,7 +120,7 @@ const Likes = styled(FatText)`
                     </div>
                 </PhotoActions>
                 <Likes>{likes ? likes : ""} {likes > 1 && "likes"} {likes === 1 && "like"}</Likes>
-                <Comments photoId={id} user={user.userName} caption={caption} comments={comments} commentCount={commentCount} />
+                <Comments photoId={id} user={user} caption={caption} comments={comments} commentCount={commentCount} />
             </PhotoData>
         </PhotoContainer>
     )

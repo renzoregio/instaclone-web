@@ -7,6 +7,7 @@ import { FatText } from "../shared";
 const CommentContainer = styled.div`
     display: flex; 
     align-items: center;
+    margin: 8px 0px;
 `
 
 const CommentCaption = styled.span`
@@ -26,7 +27,7 @@ const CommentCaption = styled.span`
 const Comment = ({ user, caption } : ICommentComponent) => {
     return (
         <CommentContainer>
-            <FatText>{user}</FatText>
+            <FatText>{user.userName}</FatText>
             <CommentCaption>{caption.split(" ").map((word, i) => (
                 /[#@][\w]+/g.test(word) ? 
                     <React.Fragment key={i}>
