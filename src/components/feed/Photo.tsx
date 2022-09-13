@@ -120,7 +120,7 @@ const Likes = styled(FatText)`
                     </div>
                 </PhotoActions>
                 <Likes>{likes ? likes : ""} {likes > 1 && "likes"} {likes === 1 && "like"}</Likes>
-                <Comments user={user.userName} caption={caption} comments={comments} commentCount={commentCount} />
+                <Comments photoId={id} user={user.userName} caption={caption} comments={comments} commentCount={commentCount} />
             </PhotoData>
         </PhotoContainer>
     )

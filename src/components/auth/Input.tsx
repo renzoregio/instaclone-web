@@ -36,7 +36,7 @@ interface IInput {
     type : string , 
     placeholder : string, 
     register: UseFormRegister<FormValues>, 
-    name: "username" | "password" | "firstName" | "lastName" | "email", 
+    name: "username" | "password" | "firstName" | "lastName" | "email" | "payload", 
     validations?: IValidationObj, 
     hasError?: boolean, 
     onFocus? : any  

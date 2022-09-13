@@ -24,6 +24,7 @@ export interface IComment {
 }
 
 export interface IComments {
+    photoId: string,
     user: string,
     caption: string, 
     comments: IComment[],
