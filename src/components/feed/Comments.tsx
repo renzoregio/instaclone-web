@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client"
+import { gql, useMutation } from "@apollo/client"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
 import useUser from "../../hooks/useUser"
@@ -56,12 +56,26 @@ const Comments = ({ photoId, user, caption, comments, commentCount } : IComments
             }
 
             setValue("payload", "")
-
+            const newCacheComment = cache.writeFragment({
+                data: newComment,
+                fragment: gql`
+                    fragment createComment on Comment {
+                        id
+                        createdAt
+                        isMine
+                        payload
+                        user {
+                            userName
+                            avatar
+                        }
+                    }
+                `
+            })
             cache.modify({
                 id: `Photo:${photoId}`,
                 fields: {
                     comments(prev: any){
-                        return [...prev, newComment]
+                        return [...prev, newCacheComment]
                     },
                     commentCount(prev: number){
                         return prev + 1
