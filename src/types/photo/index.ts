@@ -32,6 +32,9 @@ export interface IComments {
 }
 
 export interface ICommentComponent {
+    id?: string,
+    photoId?: string,
     user: User,
     caption: string
+    isMyComment?: boolean
 }

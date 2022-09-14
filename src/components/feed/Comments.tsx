@@ -109,7 +109,7 @@ const Comments = ({ photoId, user, caption, comments, commentCount } : IComments
             <Comment user={user} caption={caption} /> 
             <CommentCount>{commentCount === 1 ? "1 comment" : `${commentCount} comments`}</CommentCount>
             {comments.map(comment => (
-                <Comment key={comment.id} user={comment.user} caption={comment.payload} />
+                <Comment id={comment.id} photoId={photoId} isMyComment={comment.isMyComment} key={comment.id} user={comment.user} caption={comment.payload} />
             ))}
             <form onSubmit={handleSubmit(onValid)}>
                 <AddCommentContainer>
