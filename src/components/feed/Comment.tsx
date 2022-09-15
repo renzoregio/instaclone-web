@@ -63,7 +63,9 @@ const Comment = ({ id, user, caption, isMyComment, photoId } : ICommentComponent
     
     return (
         <CommentContainer>
-            <FatText>{user.userName}</FatText>
+            <Link to={`/users/${user.userName}`}>
+                <FatText>{user.userName}</FatText>
+            </Link>
             <CommentCaption>{caption.split(" ").map((word, i) => (
                 /[#@][\w]+/g.test(word) ? 
                     <React.Fragment key={i}>

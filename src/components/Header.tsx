@@ -72,9 +72,11 @@ const Header  = () => {
                         <Icon>
                             <FontAwesomeIcon icon={faCompass} size="lg" />
                         </Icon>
-                        <Icon>
-                            <Avatar url={avatarUrl} isLarge={false} />
-                        </Icon>
+                        <Link to={`/users/${data?.data?.getMyProfile.userName}`}>
+                            <Icon>
+                                <Avatar url={avatarUrl} isLarge={false} />
+                            </Icon>
+                        </Link>
                     </IconContainer>  
                     :
                     <Link to={routes.home}>

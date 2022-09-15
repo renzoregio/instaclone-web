@@ -8,6 +8,7 @@ import { IPhoto } from "../../types/photo";
 import Comments from "./Comments";
 import { useMutation } from "@apollo/client";
 import { TOGGLE_LIKE_MUTATION } from "../../mutations/photo";
+import { Link } from "react-router-dom";
 
 const PhotoContainer = styled.div`
     background-color: white;
@@ -21,9 +22,14 @@ const PhotoHeader = styled.div`
     padding: 15px;
     display: flex;
     align-items: center;
+
+    a {
+        display: flex;
+        align-items: center;
+    }
 `
 const Username = styled(FatText)`
-    margin-left: 15px;
+    margin-left: 8px;
 `
 
 const PhotoFile = styled.img`
@@ -98,8 +104,10 @@ const Likes = styled(FatText)`
     return (
         <PhotoContainer> 
             <PhotoHeader>
-                <Avatar url={user.avatar} isLarge={true} />
-                <Username>{user.userName}</Username>
+                <Link to={`/users/${user.userName}`}>
+                    <Avatar url={user.avatar} isLarge={true} />
+                    <Username>{user.userName}</Username>
+                </Link>
             </PhotoHeader>
             <PhotoFile src={file} />
             <PhotoData>
