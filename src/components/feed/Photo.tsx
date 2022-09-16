@@ -105,7 +105,7 @@ const Likes = styled(FatText)`
         <PhotoContainer> 
             <PhotoHeader>
                 <Link to={`/users/${user.userName}`}>
-                    <Avatar url={user.avatar} isLarge={true} />
+                    <Avatar url={user.avatar} size={30} />
                     <Username>{user.userName}</Username>
                 </Link>
             </PhotoHeader>

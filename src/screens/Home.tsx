@@ -5,9 +5,7 @@ import PageTitle from "../components/PageTitle";
 import { SEE_FEED_QUERY } from "../queries/feed";
 import { IPhoto } from "../types/photo";
 
-const FeedContainer = styled.div`
-    margin-top: 100px;
-`
+
 
 
 const Home = () => {
@@ -17,11 +15,9 @@ const Home = () => {
     return (
         <>
             <PageTitle pageTitle="Home"/>
-            <FeedContainer>
                 {data?.seeFeed.map((photo : IPhoto) => (
                     <Photo key={photo.id} {...photo} />
                 ))}
-            </FeedContainer>
         </>
     )
 }

@@ -113,7 +113,7 @@ const Comments = ({ photoId, user, caption, comments, commentCount } : IComments
             ))}
             <form onSubmit={handleSubmit(onValid)}>
                 <AddCommentContainer>
-                    <Avatar url={loggedInUserAvatar} isLarge={false} />
+                    <Avatar url={loggedInUserAvatar} size={25} />
                     <Input type="text" placeholder="Add a comment..." register={register} name="payload" validations={{ required : true }} />
                 </AddCommentContainer>
             </form>

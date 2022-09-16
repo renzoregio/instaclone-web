@@ -7,6 +7,7 @@ const Content = styled.main`
     max-width: 930px;
     margin-top: 45px;
     width: 100%;
+    margin-top: 100px;
 `
 
 const Layout = ({ children } : { children: React.ReactNode }) => {
