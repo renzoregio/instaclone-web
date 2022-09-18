@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Avatar from "../components/Avatar";
 import Layout from "../components/Layout";
+import PageTitle from "../components/PageTitle";
 import SEE_PROFILE_QUERY from "../queries/profile";
 
 const Wrapper = styled.div`
@@ -38,7 +39,11 @@ const Username = styled.span`
     font-weight: 300;
 `
 
-const FollowDataContainer = styled.div`
+const Row = styled.div`
+    display: flex;
+`
+
+const FollowDataContainer = styled(Row)`
     font-size: 16px;
     margin: 20px 0px;
     div {
@@ -119,18 +124,44 @@ const PostsTab = styled.div`
     }
 `
 
+const Button = styled.button`
+    margin-left: 20px;
+    padding: 5px 9px;
+    font-size: 13px;
+    font-weight: 600;
+    background-color: transparent;
+    border: 1px solid ${props => props.theme.borderColor};
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: rgb(38, 38, 38);
+    text-overflow: ellipsis;
+    width: auto;
+    text-transform: inherit;
+`
+
 const Profile = () => {
     const { userName } = useParams();
-    const { data } = useQuery(SEE_PROFILE_QUERY, { variables: { userName }})
+    const { data, loading } = useQuery(SEE_PROFILE_QUERY, { variables: { userName }})
     console.log(data)
 
     return (
         <Layout>
+            <PageTitle pageTitle={loading ? "Loading..." : `${data?.seeProfile?.userName}'s Profile`} />
             <Wrapper>
                 <ProfileDataContainer>
                     <Avatar size={150} url={data?.seeProfile?.avatar} />
                     <AdditionalProfileInfoContainer>
-                        <Username>{data?.seeProfile?.userName}</Username>
+                        <Row>
+                            <Username>{data?.seeProfile?.userName}</Username>
+                            
+                                <Button>
+                                    { data?.seeProfile?.isMyProfile && "Edit Profile" }
+                                    { !data?.seeProfile?.isFollowing && !data?.seeProfile?.isMyProfile && "Follow" }
+                                    { data?.seeProfile?.isFollowing && !data?.seeProfile?.isMyProfile && "Unfollow" }
+                                </Button>
+                            
+                        </Row>
                         <FollowDataContainer>
                             <div>
                                 <span><b>{data?.seeProfile?.photos.length}</b> posts</span>
