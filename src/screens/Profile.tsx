@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { faBorderAll } from "@fortawesome/free-solid-svg-icons";
+import { faBorderAll, faComment, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -57,11 +57,49 @@ const PhotosContainer = styled.div`
     grid-template-columns: auto auto auto;
 `
 
-const PhotoThumbnail = styled.img`
+const PhotoThumbnail = styled.div<{backgroundImage: string}>`
     height: 293px;
     width: 293px;
+    background-image: url(${(props) => props.backgroundImage});
+    background-size: cover;
+    position: relative;
     margin: 10px;
+    background-color: black;
+
+    :hover {
+        div {
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
 `
+
+const PhotoInfoContainer = styled.div`
+    opacity: 0;
+    display: flex;
+    background-color: #00000058;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+`
+
+const Icons = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+`
+
+const Icon = styled.div`
+    display: flex; 
+    color: white;
+    span {
+        margin-left: 5px;
+    }
+`
+
+
 
 const Divider = styled.div`
     background-color: ${props => props.theme.borderColor};
@@ -78,7 +116,6 @@ const PostsTab = styled.div`
     span {
         text-transform: uppercase;
         margin-left: 5px;
-
     }
 `
 
@@ -112,7 +149,20 @@ const Profile = () => {
                 </PostsTab>
                 <PhotosContainer>
                     { data?.seeProfile?.photos?.map((photo: any) => (
-                        <PhotoThumbnail key={photo.id} src={photo.file} />
+                        <PhotoThumbnail key={photo.id} backgroundImage={photo.file}>
+                            <PhotoInfoContainer>
+                                <Icons>
+                                    <Icon>
+                                        <FontAwesomeIcon icon={faHeart} />
+                                        <span>{photo.likes}</span>
+                                    </Icon>
+                                    <Icon>
+                                        <FontAwesomeIcon icon={faComment} />
+                                        <span>{photo.commentCount}</span>
+                                    </Icon>
+                                </Icons>
+                            </PhotoInfoContainer>
+                        </PhotoThumbnail>
                     ))}
                 </PhotosContainer>
             </Wrapper>
