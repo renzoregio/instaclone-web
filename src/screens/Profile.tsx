@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { faBorderAll, faComment, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Avatar from "../components/Avatar";
 import Layout from "../components/Layout";
 import PageTitle from "../components/PageTitle";
+import { FOLLOW_USER_MUTATION, UNFOLLOW_USER_MUTATION } from "../mutations/profile";
 import SEE_PROFILE_QUERY from "../queries/profile";
 
 const Wrapper = styled.div`
@@ -143,8 +144,47 @@ const Button = styled.button`
 const Profile = () => {
     const { userName } = useParams();
     const { data, loading } = useQuery(SEE_PROFILE_QUERY, { variables: { userName }})
-    console.log(data)
 
+    const toggleFollowUpdate = (cache: any, result: any) => {
+        
+        let isOk = false;
+        const followStatus = data?.seeProfile?.isFollowing;
+        if(followStatus){
+            const { data: { unfollowUser: { ok }}} = result;
+            isOk = ok;
+        } else {
+            const { data: { followUser: { ok }}} = result;
+            isOk = ok;
+        }
+
+        if(isOk){
+            cache.modify({
+                id: `User:${data?.seeProfile?.id}`,
+                fields: {
+                    isFollowing(prev: boolean){
+                        return !prev;
+                    },
+                    totalFollowers(prev: number){
+                        return followStatus ? prev -  1 : prev + 1;
+                    }
+                }
+            })
+        }
+    }
+    const [ toggleFollowMutation ] = useMutation(data?.seeProfile?.isFollowing ? UNFOLLOW_USER_MUTATION : FOLLOW_USER_MUTATION, { 
+        variables: { userName },
+        update: toggleFollowUpdate
+    }) 
+
+   
+    
+    const executeBtnAction = () => {
+        if(data?.seeProfile?.isMyProfile){
+            return
+        }
+
+        return toggleFollowMutation()
+    }
     return (
         <Layout>
             <PageTitle pageTitle={loading ? "Loading..." : `${data?.seeProfile?.userName}'s Profile`} />
@@ -155,7 +195,7 @@ const Profile = () => {
                         <Row>
                             <Username>{data?.seeProfile?.userName}</Username>
                             
-                                <Button>
+                                <Button onClick={executeBtnAction}>
                                     { data?.seeProfile?.isMyProfile && "Edit Profile" }
                                     { !data?.seeProfile?.isFollowing && !data?.seeProfile?.isMyProfile && "Follow" }
                                     { data?.seeProfile?.isFollowing && !data?.seeProfile?.isMyProfile && "Unfollow" }
