@@ -66,9 +66,11 @@ const Header  = () => {
                 <Column>
                     { isLoggedIn ?
                     <IconContainer>
-                        <Icon> 
-                            <FontAwesomeIcon icon={faHome} size="lg" />
-                        </Icon>
+                        <Link to="/">
+                            <Icon> 
+                                <FontAwesomeIcon icon={faHome} size="lg" />
+                            </Icon>
+                        </Link>
                         <Icon>
                             <FontAwesomeIcon icon={faCompass} size="lg" />
                         </Icon>

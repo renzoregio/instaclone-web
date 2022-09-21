@@ -8,6 +8,7 @@ const GET_MY_PROFILE_QUERY = gql`
         getMyProfile {
             userName
             avatar
+            id
         }
     }
 `
@@ -16,7 +17,8 @@ interface IUseUserResults {
     data: {
         getMyProfile: {
             avatar: string,
-            userName: string
+            userName: string,
+            id: string,
         }
     }
 }

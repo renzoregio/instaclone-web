@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Avatar from "../components/Avatar";
 import Layout from "../components/Layout";
 import PageTitle from "../components/PageTitle";
+import useUser from "../hooks/useUser";
 import { FOLLOW_USER_MUTATION, UNFOLLOW_USER_MUTATION } from "../mutations/profile";
 import SEE_PROFILE_QUERY from "../queries/profile";
 
@@ -142,6 +143,8 @@ const Button = styled.button`
 `
 
 const Profile = () => {
+    const loggedInUser  = useUser();
+    
     const { userName } = useParams();
     const { data, loading } = useQuery(SEE_PROFILE_QUERY, { variables: { userName }})
 
@@ -166,6 +169,15 @@ const Profile = () => {
                     },
                     totalFollowers(prev: number){
                         return followStatus ? prev -  1 : prev + 1;
+                    }
+                }
+            })
+
+            cache.modify({
+                id: `User:${loggedInUser?.data?.getMyProfile.id}`,
+                fields: {
+                    totalFollowing(prev: number){
+                        return followStatus ? prev - 1 : prev + 1;
                     }
                 }
             })
